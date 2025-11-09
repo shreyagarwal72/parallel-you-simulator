@@ -60,9 +60,18 @@ export const Navigation = () => {
         <div className="flex items-center gap-4">
           {user ? (
             <>
-              <span className="text-sm text-muted-foreground">
-                {user.email}
-              </span>
+              <div className="hidden md:flex items-center gap-3">
+                {user.user_metadata?.avatar_url && (
+                  <img 
+                    src={user.user_metadata.avatar_url} 
+                    alt="Profile"
+                    className="w-8 h-8 rounded-full border-2 border-primary"
+                  />
+                )}
+                <span className="text-sm text-muted-foreground">
+                  {user.user_metadata?.name || user.email}
+                </span>
+              </div>
               <Button onClick={handleLogout} variant="outline" className="glow">
                 Logout
               </Button>

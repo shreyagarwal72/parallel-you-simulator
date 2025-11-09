@@ -1,1 +1,7 @@
 project_id = "uhqqsignvqaexsyjaedm"
+
+[functions.generate-life-event]
+verify_jwt = false
+
+[functions.generate-life-summary]
+verify_jwt = false
