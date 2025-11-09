@@ -14,7 +14,93 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          id: string
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          id: string
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          id?: string
+          username?: string | null
+        }
+        Relationships: []
+      }
+      simulations: {
+        Row: {
+          career_path: string
+          country: string
+          created_at: string | null
+          current_age: number | null
+          education: string
+          happiness_score: number | null
+          health_score: number | null
+          id: string
+          is_alive: boolean | null
+          last_updated: string | null
+          legacy_score: number | null
+          life_events: Json | null
+          personality: string
+          risk_tolerance: string
+          simulation_start_date: string | null
+          user_id: string
+          username: string
+          virtual_months_elapsed: number | null
+          wealth_level: string | null
+        }
+        Insert: {
+          career_path: string
+          country: string
+          created_at?: string | null
+          current_age?: number | null
+          education: string
+          happiness_score?: number | null
+          health_score?: number | null
+          id?: string
+          is_alive?: boolean | null
+          last_updated?: string | null
+          legacy_score?: number | null
+          life_events?: Json | null
+          personality: string
+          risk_tolerance: string
+          simulation_start_date?: string | null
+          user_id: string
+          username: string
+          virtual_months_elapsed?: number | null
+          wealth_level?: string | null
+        }
+        Update: {
+          career_path?: string
+          country?: string
+          created_at?: string | null
+          current_age?: number | null
+          education?: string
+          happiness_score?: number | null
+          health_score?: number | null
+          id?: string
+          is_alive?: boolean | null
+          last_updated?: string | null
+          legacy_score?: number | null
+          life_events?: Json | null
+          personality?: string
+          risk_tolerance?: string
+          simulation_start_date?: string | null
+          user_id?: string
+          username?: string
+          virtual_months_elapsed?: number | null
+          wealth_level?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
