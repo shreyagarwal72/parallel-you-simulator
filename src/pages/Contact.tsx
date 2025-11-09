@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -52,32 +53,32 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative flex flex-col">
       <Navigation />
       <div 
         className="absolute inset-0 bg-cover bg-center opacity-10"
         style={{ backgroundImage: `url(${abstractBg})` }}
       />
 
-      <div className="relative z-10 container mx-auto px-4 pt-32 pb-16">
+      <div className="relative z-10 container mx-auto px-4 py-8 pt-24 pb-16 flex-1">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="max-w-2xl mx-auto"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 gradient-text">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-6 md:mb-8 gradient-text">
             Contact Us
           </h1>
 
           <Card className="bg-card/50 backdrop-blur-md border-primary/20 glow">
-            <CardHeader>
-              <CardTitle>Get in Touch</CardTitle>
-              <CardDescription>
+            <CardHeader className="p-4 md:p-6">
+              <CardTitle className="text-xl md:text-2xl">Get in Touch</CardTitle>
+              <CardDescription className="text-sm">
                 Have questions or feedback? We'd love to hear from you.
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <CardContent className="p-4 md:p-6 pt-0">
+              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium">
                     Name
@@ -132,6 +133,7 @@ const Contact = () => {
           </Card>
         </motion.div>
       </div>
+      <Footer />
     </div>
   );
 };

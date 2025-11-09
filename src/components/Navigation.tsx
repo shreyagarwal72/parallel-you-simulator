@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useState, useEffect } from "react";
@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 export const Navigation = () => {
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -76,7 +77,7 @@ export const Navigation = () => {
                 Logout
               </Button>
             </>
-          ) : (
+          ) : location.pathname !== "/auth" && (
             <Button asChild className="glow">
               <Link to="/auth">Login</Link>
             </Button>

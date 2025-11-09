@@ -311,21 +311,21 @@ const Simulator = () => {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative flex flex-col">
       <Navigation />
       <div 
         className="absolute inset-0 bg-cover bg-center opacity-10"
         style={{ backgroundImage: `url(${abstractBg})` }}
       />
 
-      <div className="relative z-10 container mx-auto px-4 pt-32 pb-16">
+      <div className="relative z-10 container mx-auto px-4 py-8 pt-24 pb-16 flex-1">
         {!simulation && (
           <SimulatorSetup onStart={handleStartSimulation} loading={loading} />
         )}
 
         {simulation && simulation.is_alive && !lifeSummary && (
-          <div className="grid lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+            <div className="lg:col-span-2 order-2 lg:order-1">
               <SimulatorActive
                 simulation={simulation}
                 currentEvent={currentEvent}
@@ -334,7 +334,7 @@ const Simulator = () => {
                 loading={loading}
               />
             </div>
-            <div>
+            <div className="order-1 lg:order-2">
               <LifeTimeline 
                 events={simulation.life_events || []} 
                 currentAge={simulation.current_age}

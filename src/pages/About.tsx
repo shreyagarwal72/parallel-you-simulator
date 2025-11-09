@@ -1,37 +1,38 @@
 import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import abstractBg from "@/assets/abstract-bg.jpg";
 
 const About = () => {
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative flex flex-col">
       <Navigation />
       <div 
         className="absolute inset-0 bg-cover bg-center opacity-10"
         style={{ backgroundImage: `url(${abstractBg})` }}
       />
 
-      <div className="relative z-10 container mx-auto px-4 pt-32 pb-16">
+      <div className="relative z-10 container mx-auto px-4 py-8 pt-24 pb-16 flex-1">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="max-w-3xl mx-auto"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 gradient-text">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-6 md:mb-8 gradient-text">
             About Parallel You
           </h1>
 
           <Card className="bg-card/50 backdrop-blur-md border-primary/20 glow">
             <CardHeader>
-              <CardTitle className="text-2xl">The Concept</CardTitle>
+              <CardTitle className="text-xl md:text-2xl">The Concept</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6 text-muted-foreground">
+            <CardContent className="space-y-4 md:space-y-6 text-muted-foreground text-sm md:text-base">
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="text-lg leading-relaxed"
+                className="text-base md:text-lg leading-relaxed"
               >
                 Every choice you make creates another you. Step into your parallel world.
               </motion.p>
@@ -40,7 +41,7 @@ const About = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
-                className="space-y-4"
+                className="space-y-3 md:space-y-4"
               >
                 <p>
                   Parallel You is an AI-powered life simulator that lets you explore alternate 
@@ -67,16 +68,25 @@ const About = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
-                className="pt-6 border-t border-border"
+                className="pt-4 md:pt-6 border-t border-border"
               >
-                <p className="text-center text-sm">
-                  Crafted by <span className="text-primary font-semibold">Nextup Studio</span>
+                <p className="text-center text-xs md:text-sm">
+                  Crafted by{" "}
+                  <a 
+                    href="https://nextup-studio.vercel.app" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-primary font-semibold hover:underline"
+                  >
+                    Nextup Studio
+                  </a>
                 </p>
               </motion.div>
             </CardContent>
           </Card>
         </motion.div>
       </div>
+      <Footer />
     </div>
   );
 };
