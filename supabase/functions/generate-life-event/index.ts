@@ -12,49 +12,65 @@ serve(async (req) => {
   }
 
   try {
-    const { age, country, education, personality, career, riskTolerance, previousEvents } = await req.json();
+    const { age, country, education, personality, career, riskTolerance, username, currentStats, previousEvents } = await req.json();
     
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
     if (!LOVABLE_API_KEY) {
       throw new Error('LOVABLE_API_KEY not configured');
     }
 
-    const systemPrompt = `You are a life simulation engine. Generate realistic life events for a person based on their profile and current age. Events should be age-appropriate and reflect realistic life progressions.
+    const systemPrompt = `You are a life simulation AI that generates CAREER-FOCUSED, milestone-based life events.
 
-Consider:
-- Educational milestones (school, college, graduation)
-- Career progression (entry level, promotions, challenges)
-- Relationships (friendships, romance, marriage, family)
-- Health events (minor illnesses, fitness achievements, serious conditions)
-- Financial changes (savings, investments, losses, windfalls)
-- Personal growth (hobbies, achievements, failures)
-- Social connections (community involvement, networking)
+Generate a SIGNIFICANT life event for ${username}, age ${age}, who is a ${career} in ${country}.
 
-Generate a single life event as a JSON object with this structure:
+Profile:
+- Education: ${education}
+- Personality: ${personality}
+- Risk Tolerance: ${riskTolerance}
+- Current Stats: Happiness ${currentStats?.happiness}/100, Wealth ${currentStats?.wealth}, Health ${currentStats?.health}/100, Legacy ${currentStats?.legacy}/100
+
+CRITICAL GUIDELINES:
+1. Make the event DEEPLY CONNECTED to their ${career} career
+2. This is a MILESTONE event at age ${age} - make it significant and memorable
+3. Focus on these age-appropriate career milestones:
+   - Age 0-5: Birth, early childhood development
+   - Age 13-18: School years, discovering interest in ${career}
+   - Age 18-25: University/training for ${career}, first internships, entry-level position
+   - Age 25-40: Career advancement, major projects, promotions, work-life balance challenges
+   - Age 40-60: Leadership roles, mentoring, industry recognition, career peak
+   - Age 60-90: Legacy building, retirement, passing knowledge to next generation
+4. Include relationships/family events that intersect with their ${career} career
+5. 60% of events should offer 2-3 meaningful choices with clear consequences
+6. Make events emotionally engaging and realistic
+
+Return ONLY valid JSON:
 {
-  "title": "Brief event title",
-  "description": "Detailed description of what happened",
-  "type": "career|education|relationship|health|financial|personal",
-  "impact": {
-    "happiness": number between -20 and 20,
-    "wealth": number between -20 and 20,
-    "health": number between -20 and 20,
-    "legacy": number between -10 and 10
-  },
-  "hasChoice": boolean,
+  "title": "Career-focused event title",
+  "description": "2-3 engaging sentences about this milestone",
+  "type": "career|health|social|financial|education|family|achievement",
+  "hasChoice": true/false,
   "choices": [
     {
-      "text": "Choice text",
-      "impact": { same structure as above }
+      "text": "Choice description",
+      "impact": {
+        "happiness": -5 to +10,
+        "wealth": "Starting Out|Comfortable|Well Off|Wealthy|Very Wealthy",
+        "health": -5 to +10,
+        "legacy": -5 to +10
+      }
     }
-  ] (only if hasChoice is true)
-}
-
-Make the event realistic and appropriate for age ${age}. Consider their background: ${country}, ${education}, ${personality}, ${career}, risk tolerance: ${riskTolerance}.`;
+  ],
+  "impact": {
+    "happiness": -5 to +10,
+    "wealth": "Starting Out|Comfortable|Well Off|Wealthy|Very Wealthy",
+    "health": -5 to +10,
+    "legacy": -5 to +10
+  }
+}`;
 
     const userPrompt = previousEvents && previousEvents.length > 0 
-      ? `Previous events in this person's life: ${JSON.stringify(previousEvents.slice(-5))}. Generate the next life event at age ${age}.`
-      : `Generate the first life event for a person who is ${age} years old.`;
+      ? `Previous career milestones: ${JSON.stringify(previousEvents.slice(-3))}. Generate the next MAJOR career milestone for age ${age} as a ${career}.`
+      : `Generate the first significant life event for ${username}, age ${age}, beginning their journey as a ${career}.`;
 
     const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',

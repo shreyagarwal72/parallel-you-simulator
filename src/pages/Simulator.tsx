@@ -49,7 +49,8 @@ const Simulator = () => {
     const daysSince = Math.floor((now.getTime() - lastUpdate.getTime()) / (1000 * 60 * 60 * 24));
     
     if (daysSince > 0) {
-      const newMonths = sim.virtual_months_elapsed + daysSince;
+      // 1 real day = 2 virtual months
+      const newMonths = sim.virtual_months_elapsed + (daysSince * 2);
       const newAge = Math.floor(newMonths / 12);
       
       if (newAge >= 90 || sim.health_score <= 0) {
@@ -74,7 +75,18 @@ const Simulator = () => {
 
       if (!error) {
         setSimulation(updatedSim);
-        await generateNextEvent(updatedSim);
+        
+        // Only generate event if we hit a milestone age
+        const milestoneAges = [0, 5, 10, 13, 16, 18, 22, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85];
+        const hasEventForAge = sim.life_events?.some((e: any) => e.age === newAge);
+        
+        if (milestoneAges.includes(newAge) && !hasEventForAge) {
+          await generateNextEvent(updatedSim);
+        } else if (sim.life_events && sim.life_events.length > 0) {
+          setCurrentEvent(sim.life_events[sim.life_events.length - 1]);
+        } else {
+          await generateNextEvent(updatedSim);
+        }
       }
     } else {
       if (sim.life_events && sim.life_events.length > 0) {
@@ -101,6 +113,13 @@ const Simulator = () => {
           personality: sim.personality,
           career: sim.career_path,
           riskTolerance: sim.risk_tolerance,
+          username: sim.username,
+          currentStats: {
+            happiness: sim.happiness_score,
+            wealth: sim.wealth_level,
+            health: sim.health_score,
+            legacy: sim.legacy_score,
+          },
           previousEvents: sim.life_events || [],
         },
       });

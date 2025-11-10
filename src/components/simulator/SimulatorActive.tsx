@@ -2,7 +2,18 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { motion } from "framer-motion";
-import { Heart, DollarSign, Activity, Trophy } from "lucide-react";
+import { Heart, DollarSign, Activity, Trophy, AlertTriangle } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface SimulatorActiveProps {
   simulation: any;
@@ -104,18 +115,20 @@ export const SimulatorActive = ({
 
               {currentEvent.hasChoice && currentEvent.choices ? (
                 <div className="space-y-3 pt-4">
-                  <p className="font-semibold text-primary">What will you do?</p>
-                  {currentEvent.choices.map((choice: any, index: number) => (
-                    <Button
-                      key={index}
-                      onClick={() => onMakeChoice(index)}
-                      disabled={loading}
-                      variant="outline"
-                      className="w-full text-left h-auto py-4 px-4 border-primary/20 hover:border-primary"
-                    >
-                      {choice.text}
-                    </Button>
-                  ))}
+                  <p className="font-semibold text-primary mb-2">What will you do?</p>
+                  <div className="flex flex-col gap-3">
+                    {currentEvent.choices.map((choice: any, index: number) => (
+                      <Button
+                        key={index}
+                        onClick={() => onMakeChoice(index)}
+                        disabled={loading}
+                        variant="outline"
+                        className="w-full text-left h-auto py-3 sm:py-4 px-3 sm:px-4 border-primary/20 hover:border-primary text-sm sm:text-base whitespace-normal"
+                      >
+                        <span className="block">{choice.text}</span>
+                      </Button>
+                    ))}
+                  </div>
                 </div>
               ) : (
                 <div className="pt-4">
@@ -133,15 +146,39 @@ export const SimulatorActive = ({
         </motion.div>
       )}
 
-      {/* End Life Button */}
+      {/* End Life Button with Warning */}
       <div className="text-center">
-        <Button
-          onClick={onEndLife}
-          variant="destructive"
-          className="opacity-50 hover:opacity-100"
-        >
-          End Simulation
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button
+              variant="destructive"
+              className="opacity-50 hover:opacity-100"
+            >
+              <AlertTriangle className="w-4 h-4 mr-2" />
+              End Simulation
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent className="max-w-[90vw] sm:max-w-md">
+            <AlertDialogHeader>
+              <AlertDialogTitle className="flex items-center gap-2">
+                <AlertTriangle className="w-5 h-5 text-destructive" />
+                End Your Life?
+              </AlertDialogTitle>
+              <AlertDialogDescription className="text-left">
+                Are you sure you want to end this simulation? This will conclude {simulation.username}'s life journey and generate a final summary. This action cannot be undone.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter className="flex-col sm:flex-row gap-2">
+              <AlertDialogCancel className="w-full sm:w-auto">Cancel</AlertDialogCancel>
+              <AlertDialogAction 
+                onClick={onEndLife}
+                className="w-full sm:w-auto bg-destructive hover:bg-destructive/90"
+              >
+                Yes, End Simulation
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </div>
   );
