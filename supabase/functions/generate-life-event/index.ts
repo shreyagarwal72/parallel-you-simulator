@@ -19,39 +19,45 @@ serve(async (req) => {
       throw new Error('LOVABLE_API_KEY not configured');
     }
 
-    const systemPrompt = `You are a life simulation AI that generates CAREER-FOCUSED, milestone-based life events.
+    const systemPrompt = `You are a life simulation AI that creates easy-to-understand, career-focused life events.
 
-Generate a SIGNIFICANT life event for ${username}, age ${age}, who is a ${career} in ${country}.
+Generate a CLEAR and SIMPLE life event for ${username}, age ${age}, who works as a ${career} in ${country}.
 
-Profile:
+Current Situation:
 - Education: ${education}
 - Personality: ${personality}
-- Risk Tolerance: ${riskTolerance}
-- Current Stats: Happiness ${currentStats?.happiness}/100, Wealth ${currentStats?.wealth}, Health ${currentStats?.health}/100, Legacy ${currentStats?.legacy}/100
+- Risk Style: ${riskTolerance}
+- Happiness: ${currentStats?.happiness}/100 | Wealth: ${currentStats?.wealth} | Health: ${currentStats?.health}/100 | Legacy: ${currentStats?.legacy}/100
 
-CRITICAL GUIDELINES:
-1. Make the event DEEPLY CONNECTED to their ${career} career
-2. This is a MILESTONE event at age ${age} - make it significant and memorable
-3. Focus on these age-appropriate career milestones:
-   - Age 0-5: Birth, early childhood development
-   - Age 13-18: School years, discovering interest in ${career}
-   - Age 18-25: University/training for ${career}, first internships, entry-level position
-   - Age 25-40: Career advancement, major projects, promotions, work-life balance challenges
-   - Age 40-60: Leadership roles, mentoring, industry recognition, career peak
-   - Age 60-90: Legacy building, retirement, passing knowledge to next generation
-4. Include relationships/family events that intersect with their ${career} career
-5. 60% of events should offer 2-3 meaningful choices with clear consequences
-6. Make events emotionally engaging and realistic
+HOW TO CREATE EVENTS:
+1. Write in SIMPLE, EVERYDAY language - avoid complex words
+2. Make it about their ${career} career - this is their main story
+3. Create events that match their age ${age}:
+   - Age 0-5: Birth and baby years
+   - Age 13-18: School, discovering ${career} interest
+   - Age 18-25: Learning ${career} skills, first job
+   - Age 25-40: Growing in ${career}, getting promoted, balancing work and life
+   - Age 40-60: Becoming a leader, teaching others, reaching career peak
+   - Age 60-90: Retiring, leaving a legacy, mentoring young people
+4. Add family and relationship moments that connect to their ${career}
+5. Give 2-3 CLEAR choices most of the time (60% of events)
+6. Make each choice show what will happen to their happiness, money, health, and reputation
 
-Return ONLY valid JSON:
+KEEP IT SIMPLE:
+- Use short sentences
+- Explain things clearly
+- Make choices obvious
+- Show what each choice will do
+
+Return ONLY this JSON format:
 {
-  "title": "Career-focused event title",
-  "description": "2-3 engaging sentences about this milestone",
+  "title": "Simple, clear event title",
+  "description": "2-3 easy-to-read sentences explaining what's happening",
   "type": "career|health|social|financial|education|family|achievement",
   "hasChoice": true/false,
   "choices": [
     {
-      "text": "Choice description",
+      "text": "Simple choice with clear outcome",
       "impact": {
         "happiness": -5 to +10,
         "wealth": "Starting Out|Comfortable|Well Off|Wealthy|Very Wealthy",

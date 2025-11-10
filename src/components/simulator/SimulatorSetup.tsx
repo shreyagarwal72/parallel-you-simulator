@@ -38,19 +38,19 @@ export const SimulatorSetup = ({ onStart, loading }: SimulatorSetupProps) => {
       className="max-w-2xl mx-auto"
     >
       <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 gradient-text">
-        Create Your Parallel Life
+        Start Your Parallel Life
       </h1>
 
       <Card className="bg-card/50 backdrop-blur-md border-primary/20 glow">
         <CardHeader>
-          <CardTitle>Define Your Starting Point</CardTitle>
+          <CardTitle>Set Up Your Life</CardTitle>
           <CardDescription>
-            Choose your origin story. These choices will shape your journey.
+            Make simple choices to start your journey
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-2">
-            <label className="text-sm font-medium">Your Name</label>
+            <label className="text-sm font-medium">What's your name?</label>
             <Input
               value={config.username}
               onChange={(e) => setConfig({ ...config, username: e.target.value })}
@@ -60,96 +60,96 @@ export const SimulatorSetup = ({ onStart, loading }: SimulatorSetupProps) => {
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Country</label>
+            <label className="text-sm font-medium">Where are you from?</label>
             <Select
               value={config.country}
               onValueChange={(value) => setConfig({ ...config, country: value })}
             >
               <SelectTrigger className="bg-background/50 border-primary/20">
-                <SelectValue placeholder="Select country" />
+                <SelectValue placeholder="Choose your country" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="usa">United States</SelectItem>
-                <SelectItem value="uk">United Kingdom</SelectItem>
-                <SelectItem value="japan">Japan</SelectItem>
-                <SelectItem value="brazil">Brazil</SelectItem>
-                <SelectItem value="india">India</SelectItem>
-                <SelectItem value="germany">Germany</SelectItem>
-                <SelectItem value="france">France</SelectItem>
-                <SelectItem value="canada">Canada</SelectItem>
+                <SelectItem value="usa">🇺🇸 United States</SelectItem>
+                <SelectItem value="uk">🇬🇧 United Kingdom</SelectItem>
+                <SelectItem value="japan">🇯🇵 Japan</SelectItem>
+                <SelectItem value="brazil">🇧🇷 Brazil</SelectItem>
+                <SelectItem value="india">🇮🇳 India</SelectItem>
+                <SelectItem value="germany">🇩🇪 Germany</SelectItem>
+                <SelectItem value="france">🇫🇷 France</SelectItem>
+                <SelectItem value="canada">🇨🇦 Canada</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Education Level</label>
+            <label className="text-sm font-medium">What's your education?</label>
             <Select
               value={config.education}
               onValueChange={(value) => setConfig({ ...config, education: value })}
             >
               <SelectTrigger className="bg-background/50 border-primary/20">
-                <SelectValue placeholder="Select education" />
+                <SelectValue placeholder="Pick your education level" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="high-school">High School</SelectItem>
-                <SelectItem value="bachelor">Bachelor's Degree</SelectItem>
-                <SelectItem value="master">Master's Degree</SelectItem>
-                <SelectItem value="phd">PhD</SelectItem>
+                <SelectItem value="high-school">📚 High School</SelectItem>
+                <SelectItem value="bachelor">🎓 Bachelor's Degree</SelectItem>
+                <SelectItem value="master">🎯 Master's Degree</SelectItem>
+                <SelectItem value="phd">🏆 PhD</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Personality Type</label>
+            <label className="text-sm font-medium">What's your personality like?</label>
             <Select
               value={config.personality}
               onValueChange={(value) => setConfig({ ...config, personality: value })}
             >
               <SelectTrigger className="bg-background/50 border-primary/20">
-                <SelectValue placeholder="Select personality" />
+                <SelectValue placeholder="Choose your personality" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="introvert">Introvert</SelectItem>
-                <SelectItem value="extrovert">Extrovert</SelectItem>
-                <SelectItem value="ambivert">Ambivert</SelectItem>
+                <SelectItem value="introvert">🤫 Introvert (Quiet & Thoughtful)</SelectItem>
+                <SelectItem value="extrovert">🎉 Extrovert (Outgoing & Social)</SelectItem>
+                <SelectItem value="ambivert">⚖️ Ambivert (Mix of Both)</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Career Path</label>
+            <label className="text-sm font-medium">What career do you want?</label>
             <Select
               value={config.career}
               onValueChange={(value) => setConfig({ ...config, career: value })}
             >
               <SelectTrigger className="bg-background/50 border-primary/20">
-                <SelectValue placeholder="Select career" />
+                <SelectValue placeholder="Pick your dream career" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="technology">Technology</SelectItem>
-                <SelectItem value="medical">Medical</SelectItem>
-                <SelectItem value="arts">Arts & Entertainment</SelectItem>
-                <SelectItem value="business">Business</SelectItem>
-                <SelectItem value="education">Education</SelectItem>
-                <SelectItem value="engineering">Engineering</SelectItem>
-                <SelectItem value="science">Science & Research</SelectItem>
+                <SelectItem value="Data Scientist">💻 Data Scientist</SelectItem>
+                <SelectItem value="Doctor">⚕️ Doctor</SelectItem>
+                <SelectItem value="Artist">🎨 Artist</SelectItem>
+                <SelectItem value="Entrepreneur">💼 Entrepreneur</SelectItem>
+                <SelectItem value="Teacher">📖 Teacher</SelectItem>
+                <SelectItem value="Engineer">🔧 Engineer</SelectItem>
+                <SelectItem value="Researcher">🔬 Researcher</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Risk Tolerance</label>
+            <label className="text-sm font-medium">How adventurous are you?</label>
             <Select
               value={config.riskTolerance}
               onValueChange={(value) => setConfig({ ...config, riskTolerance: value })}
             >
               <SelectTrigger className="bg-background/50 border-primary/20">
-                <SelectValue placeholder="Select risk level" />
+                <SelectValue placeholder="Choose your style" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="low">Conservative</SelectItem>
-                <SelectItem value="medium">Balanced</SelectItem>
-                <SelectItem value="high">Adventurous</SelectItem>
+                <SelectItem value="low">🛡️ Play it Safe</SelectItem>
+                <SelectItem value="medium">⚡ Take Some Risks</SelectItem>
+                <SelectItem value="high">🚀 Live Dangerously</SelectItem>
               </SelectContent>
             </Select>
           </div>
